@@ -1,0 +1,361 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ADD_COLUMN
+    ALTER_TABLE
+    AND
+    BETWEEN
+    CAST
+    COMMA
+    COUNT
+    CREATE_TABLE
+    DEFAULT
+    DELETE_FROM
+    DISTINCT
+    DROP_COLUMN
+    DROP_TABLE
+    EXISTS
+    FOREIGN_KEY
+    GROUP_BY
+    HAVING
+    IN
+    INSERT_INTO
+    IS_NULL
+    JOIN
+    LIKE
+    LIMIT
+    NOT_NULL
+    ON
+    ORDER_BY
+    PRIMARY_KEY
+    SEMICOLON
+    SET
+    UNIQUE
+    UPDATE
+    VALUES
+
+Grammar
+
+Rule 0     S' -> query
+Rule 1     query -> SELECT columns FROM table WHERE condition
+Rule 2     columns -> IDENTIFIER
+Rule 3     columns -> STAR
+Rule 4     table -> IDENTIFIER
+Rule 5     condition -> IDENTIFIER EQUALS value
+Rule 6     condition -> IDENTIFIER GREATER value
+Rule 7     condition -> IDENTIFIER LESS value
+Rule 8     condition -> IDENTIFIER GREATEREQUAL value
+Rule 9     condition -> IDENTIFIER LESSEQUAL value
+Rule 10    condition -> IDENTIFIER NOTEQUAL value
+Rule 11    value -> NUMBER
+Rule 12    value -> IDENTIFIER
+Rule 13    value -> STRING
+
+Terminals, with rules where they appear
+
+ADD_COLUMN           : 
+ALTER_TABLE          : 
+AND                  : 
+BETWEEN              : 
+CAST                 : 
+COMMA                : 
+COUNT                : 
+CREATE_TABLE         : 
+DEFAULT              : 
+DELETE_FROM          : 
+DISTINCT             : 
+DROP_COLUMN          : 
+DROP_TABLE           : 
+EQUALS               : 5
+EXISTS               : 
+FOREIGN_KEY          : 
+FROM                 : 1
+GREATER              : 6
+GREATEREQUAL         : 8
+GROUP_BY             : 
+HAVING               : 
+IDENTIFIER           : 2 4 5 6 7 8 9 10 12
+IN                   : 
+INSERT_INTO          : 
+IS_NULL              : 
+JOIN                 : 
+LESS                 : 7
+LESSEQUAL            : 9
+LIKE                 : 
+LIMIT                : 
+NOTEQUAL             : 10
+NOT_NULL             : 
+NUMBER               : 11
+ON                   : 
+ORDER_BY             : 
+PRIMARY_KEY          : 
+SELECT               : 1
+SEMICOLON            : 
+SET                  : 
+STAR                 : 3
+STRING               : 13
+UNIQUE               : 
+UPDATE               : 
+VALUES               : 
+WHERE                : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+columns              : 1
+condition            : 1
+query                : 0
+table                : 1
+value                : 5 6 7 8 9 10
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . query
+    (1) query -> . SELECT columns FROM table WHERE condition
+
+    SELECT          shift and go to state 2
+
+    query                          shift and go to state 1
+
+state 1
+
+    (0) S' -> query .
+
+
+
+state 2
+
+    (1) query -> SELECT . columns FROM table WHERE condition
+    (2) columns -> . IDENTIFIER
+    (3) columns -> . STAR
+
+    IDENTIFIER      shift and go to state 4
+    STAR            shift and go to state 5
+
+    columns                        shift and go to state 3
+
+state 3
+
+    (1) query -> SELECT columns . FROM table WHERE condition
+
+    FROM            shift and go to state 6
+
+
+state 4
+
+    (2) columns -> IDENTIFIER .
+
+    FROM            reduce using rule 2 (columns -> IDENTIFIER .)
+
+
+state 5
+
+    (3) columns -> STAR .
+
+    FROM            reduce using rule 3 (columns -> STAR .)
+
+
+state 6
+
+    (1) query -> SELECT columns FROM . table WHERE condition
+    (4) table -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 8
+
+    table                          shift and go to state 7
+
+state 7
+
+    (1) query -> SELECT columns FROM table . WHERE condition
+
+    WHERE           shift and go to state 9
+
+
+state 8
+
+    (4) table -> IDENTIFIER .
+
+    WHERE           reduce using rule 4 (table -> IDENTIFIER .)
+
+
+state 9
+
+    (1) query -> SELECT columns FROM table WHERE . condition
+    (5) condition -> . IDENTIFIER EQUALS value
+    (6) condition -> . IDENTIFIER GREATER value
+    (7) condition -> . IDENTIFIER LESS value
+    (8) condition -> . IDENTIFIER GREATEREQUAL value
+    (9) condition -> . IDENTIFIER LESSEQUAL value
+    (10) condition -> . IDENTIFIER NOTEQUAL value
+
+    IDENTIFIER      shift and go to state 11
+
+    condition                      shift and go to state 10
+
+state 10
+
+    (1) query -> SELECT columns FROM table WHERE condition .
+
+    $end            reduce using rule 1 (query -> SELECT columns FROM table WHERE condition .)
+
+
+state 11
+
+    (5) condition -> IDENTIFIER . EQUALS value
+    (6) condition -> IDENTIFIER . GREATER value
+    (7) condition -> IDENTIFIER . LESS value
+    (8) condition -> IDENTIFIER . GREATEREQUAL value
+    (9) condition -> IDENTIFIER . LESSEQUAL value
+    (10) condition -> IDENTIFIER . NOTEQUAL value
+
+    EQUALS          shift and go to state 12
+    GREATER         shift and go to state 13
+    LESS            shift and go to state 14
+    GREATEREQUAL    shift and go to state 15
+    LESSEQUAL       shift and go to state 16
+    NOTEQUAL        shift and go to state 17
+
+
+state 12
+
+    (5) condition -> IDENTIFIER EQUALS . value
+    (11) value -> . NUMBER
+    (12) value -> . IDENTIFIER
+    (13) value -> . STRING
+
+    NUMBER          shift and go to state 20
+    IDENTIFIER      shift and go to state 18
+    STRING          shift and go to state 21
+
+    value                          shift and go to state 19
+
+state 13
+
+    (6) condition -> IDENTIFIER GREATER . value
+    (11) value -> . NUMBER
+    (12) value -> . IDENTIFIER
+    (13) value -> . STRING
+
+    NUMBER          shift and go to state 20
+    IDENTIFIER      shift and go to state 18
+    STRING          shift and go to state 21
+
+    value                          shift and go to state 22
+
+state 14
+
+    (7) condition -> IDENTIFIER LESS . value
+    (11) value -> . NUMBER
+    (12) value -> . IDENTIFIER
+    (13) value -> . STRING
+
+    NUMBER          shift and go to state 20
+    IDENTIFIER      shift and go to state 18
+    STRING          shift and go to state 21
+
+    value                          shift and go to state 23
+
+state 15
+
+    (8) condition -> IDENTIFIER GREATEREQUAL . value
+    (11) value -> . NUMBER
+    (12) value -> . IDENTIFIER
+    (13) value -> . STRING
+
+    NUMBER          shift and go to state 20
+    IDENTIFIER      shift and go to state 18
+    STRING          shift and go to state 21
+
+    value                          shift and go to state 24
+
+state 16
+
+    (9) condition -> IDENTIFIER LESSEQUAL . value
+    (11) value -> . NUMBER
+    (12) value -> . IDENTIFIER
+    (13) value -> . STRING
+
+    NUMBER          shift and go to state 20
+    IDENTIFIER      shift and go to state 18
+    STRING          shift and go to state 21
+
+    value                          shift and go to state 25
+
+state 17
+
+    (10) condition -> IDENTIFIER NOTEQUAL . value
+    (11) value -> . NUMBER
+    (12) value -> . IDENTIFIER
+    (13) value -> . STRING
+
+    NUMBER          shift and go to state 20
+    IDENTIFIER      shift and go to state 18
+    STRING          shift and go to state 21
+
+    value                          shift and go to state 26
+
+state 18
+
+    (12) value -> IDENTIFIER .
+
+    $end            reduce using rule 12 (value -> IDENTIFIER .)
+
+
+state 19
+
+    (5) condition -> IDENTIFIER EQUALS value .
+
+    $end            reduce using rule 5 (condition -> IDENTIFIER EQUALS value .)
+
+
+state 20
+
+    (11) value -> NUMBER .
+
+    $end            reduce using rule 11 (value -> NUMBER .)
+
+
+state 21
+
+    (13) value -> STRING .
+
+    $end            reduce using rule 13 (value -> STRING .)
+
+
+state 22
+
+    (6) condition -> IDENTIFIER GREATER value .
+
+    $end            reduce using rule 6 (condition -> IDENTIFIER GREATER value .)
+
+
+state 23
+
+    (7) condition -> IDENTIFIER LESS value .
+
+    $end            reduce using rule 7 (condition -> IDENTIFIER LESS value .)
+
+
+state 24
+
+    (8) condition -> IDENTIFIER GREATEREQUAL value .
+
+    $end            reduce using rule 8 (condition -> IDENTIFIER GREATEREQUAL value .)
+
+
+state 25
+
+    (9) condition -> IDENTIFIER LESSEQUAL value .
+
+    $end            reduce using rule 9 (condition -> IDENTIFIER LESSEQUAL value .)
+
+
+state 26
+
+    (10) condition -> IDENTIFIER NOTEQUAL value .
+
+    $end            reduce using rule 10 (condition -> IDENTIFIER NOTEQUAL value .)
+
