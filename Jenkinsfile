@@ -47,12 +47,7 @@ pipeline {
     post {
         always {
             echo 'Enviando notificación...'
-            emailext(
-                subject: "Resultado del Pipeline: ${currentBuild.fullDisplayName}",
-                body: """<p>El pipeline ha finalizado con el estado: ${currentBuild.currentResult}</p>
-                         <p>Revisa los detalles en: <a href="${env.BUILD_URL}">Jenkins Build</a></p>""",
-                to: 'tu-email@example.com'
-            )
+            slackSend channel: '#pipeline', color: 'good', message: 'Pipeline ejecutado correctamente.'
         }
     }
 }
