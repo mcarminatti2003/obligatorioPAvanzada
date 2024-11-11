@@ -8,12 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Clonar Repositorio') {
-            steps {
-                echo 'Clonando repositorio principal...'
-                git url: 'https://github.com/joaco0o0/obligatorioPAvanzada.git', branch: 'main'
-            }
-        }
 
         stage('Construir Trivia') {
             steps {
