@@ -9,6 +9,13 @@ pipeline {
 
     stages {
 
+        stage('Compilar') {
+            steps {
+                echo 'Compilando...'
+                bat 'mvn clean package'
+            }
+        }
+
         stage('Construir Trivia') {
             steps {
                 dir("${TRIVIA_DIR}") {
@@ -40,11 +47,7 @@ pipeline {
     post {
         always {
             echo 'Enviando notificación...'
-            emailext(
-                subject: "Pipeline Finalizado",
-                body: "El pipeline ha finalizado con éxito.",
-                to: 'jheredero@correo.um.edu.uy'
-            )
+            echo 'Notificación enviada'
         }
     }
 }
