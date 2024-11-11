@@ -1,0 +1,20 @@
+# Archivos comunes de compilación
+target/
+build/
+*.class
+*.jar
+*.war
+
+# Archivos del entorno de desarrollo
+.idea/
+.vscode/
+*.log
+*.zip
+
+# Archivos de Maven/Gradle
+.mvn/
+.gradle/
+
+# Archivos específicos del sistema operativo
+.DS_Store
+Thumbs.db
