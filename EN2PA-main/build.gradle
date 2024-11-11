@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // JUnit 5 BOM
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    // JUnit 4
+    testImplementation 'junit:junit:4.13.1'
+
+    // Este puente permite ejecutar pruebas JUnit 4 bajo JUnit 5 (si es necesario)
+    testImplementation 'org.junit.vintage:junit-vintage-engine'
+}
+
+test {
+    useJUnitPlatform() // Usa la plataforma de JUnit 5 para ejecutar las pruebas
+}
