@@ -53,7 +53,6 @@ pipeline {
     post {
         always {
             echo 'Enviando notificación...'
-            # Notificar por mensaje en consola
             echo 'Notificación enviada'
         }
     }
