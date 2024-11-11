@@ -19,7 +19,7 @@ pipeline {
     stage('Compilar') {
         steps {
             echo 'Compilando...'
-            sh 'mvn clean package'
+            bat 'mvn clean package'
         }
     }
 
