@@ -16,6 +16,13 @@ pipeline {
         }
     }
 
+    stage('Compilar') {
+        steps {
+            echo 'Compilando...'
+            sh 'mvn clean package'
+        }
+    }
+
     post {
         always {
             echo 'Enviando notificación...'
