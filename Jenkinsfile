@@ -53,11 +53,8 @@ pipeline {
     post {
         always {
             echo 'Enviando notificación...'
-            emailext(
-                subject: "Pipeline Finalizado",
-                body: "El pipeline ha finalizado con éxito.",
-                to: 'jheredero@correo.um.edu.uy'
-            )
+            # Notificar por mensaje en consola
+            echo 'Notificación enviada'
         }
     }
 }
