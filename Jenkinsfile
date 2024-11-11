@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        // Directorios de los módulos
         TRIVIA_DIR = 'TRIVIA'
         PEDIDOS_DIR = 'PEDIDOS'
         USQL_DIR = 'USQL'
@@ -20,7 +19,7 @@ pipeline {
             steps {
                 dir("${TRIVIA_DIR}") {
                     echo 'Construyendo módulo Trivia...'
-                    sh 'mvn clean install -DskipTests'
+                    bat 'mvn clean install -DskipTests'
                 }
             }
         }
@@ -29,7 +28,7 @@ pipeline {
             steps {
                 dir("${PEDIDOS_DIR}") {
                     echo 'Construyendo módulo Pedidos...'
-                    sh 'mvn clean install -DskipTests'
+                    bat 'mvn clean install -DskipTests'
                 }
             }
         }
@@ -38,7 +37,7 @@ pipeline {
             steps {
                 dir("${USQL_DIR}") {
                     echo 'Construyendo módulo USQL...'
-                    sh 'mvn clean install -DskipTests'
+                    bat 'mvn clean install -DskipTests'
                 }
             }
         }
@@ -47,7 +46,11 @@ pipeline {
     post {
         always {
             echo 'Enviando notificación...'
-            slackSend channel: '#pipeline', color: 'good', message: 'Pipeline ejecutado correctamente.'
+            emailext(
+                subject: "Pipeline Finalizado",
+                body: "El pipeline ha finalizado con éxito.",
+                to: 'tu-email@example.com'
+            )
         }
     }
 }
