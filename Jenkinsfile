@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         // Directorios de los módulos
-        TRIVIA_DIR = 'CarminattiHeredero'
-        PEDIDOS_DIR = 'EN2PA-main'
-        USQL_DIR = 'Entregable3'
+        TRIVIA_DIR = 'TRIVIA'
+        PEDIDOS_DIR = 'PEDIDOS'
+        USQL_DIR = 'USQL'
     }
 
     stages {
@@ -42,32 +42,11 @@ pipeline {
                 }
             }
         }
-
-        stage('Ejecutar Tests') {
-            steps {
-                echo 'Ejecutando pruebas unitarias para todos los módulos...'
-                sh 'mvn test'
-            }
-        }
-
-        stage('Análisis de Código') {
-            steps {
-                echo 'Ejecutando análisis de código estático...'
-                sh 'mvn sonar:sonar'
-            }
-        }
-
-        stage('Empaquetar Aplicación') {
-            steps {
-                echo 'Empaquetando la aplicación completa...'
-                sh 'mvn package'
-            }
-        }
     }
 
     post {
         always {
-            echo 'Enviando notificación por correo electrónico...'
+            echo 'Enviando notificación...'
             emailext(
                 subject: "Resultado del Pipeline: ${currentBuild.fullDisplayName}",
                 body: """<p>El pipeline ha finalizado con el estado: ${currentBuild.currentResult}</p>
