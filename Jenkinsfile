@@ -49,7 +49,7 @@ pipeline {
             emailext(
                 subject: "Pipeline Finalizado",
                 body: "El pipeline ha finalizado con éxito.",
-                to: 'tu-email@example.com'
+                to: 'jheredero@correo.um.edu.uy'
             )
         }
     }
