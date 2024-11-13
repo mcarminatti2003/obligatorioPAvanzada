@@ -8,7 +8,6 @@ pipeline {
     }
 
     stages {
-
         stage('Compilar') {
             steps {
                 echo 'Compilando...'
@@ -20,7 +19,7 @@ pipeline {
             steps {
                 dir("${TRIVIA_DIR}") {
                     echo 'Construyendo módulo Trivia...'
-                    bat 'mvn clean install -DskipTests'
+                    bat './gradlew clean build -x test'
                 }
             }
         }
@@ -29,7 +28,7 @@ pipeline {
             steps {
                 dir("${PEDIDOS_DIR}") {
                     echo 'Construyendo módulo Pedidos...'
-                    bat 'mvn clean install -DskipTests'
+                    bat './gradlew clean build -x test'
                 }
             }
         }
@@ -38,16 +37,9 @@ pipeline {
             steps {
                 dir("${USQL_DIR}") {
                     echo 'Construyendo módulo USQL...'
-                    bat 'mvn clean install -DskipTests'
+                    bat './gradlew clean build -x test'
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            echo 'Enviando notificación...'
-            echo 'Notificación enviada'
         }
     }
 }
