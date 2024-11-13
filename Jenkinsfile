@@ -12,7 +12,7 @@ pipeline {
         stage('Compilar') {
             steps {
                 echo 'Compilando...'
-                bat 'mvn clean package'
+                bat './gradlew clean build'
             }
         }
 
